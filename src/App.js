@@ -1,12 +1,14 @@
 // import './App.css';
 import React from 'react';
-import AlbumFeature from './features/Album';
-import TodoFeature from './features/Todo';
+import ColorBox from './components/ColorBox';
+import Counter from './components/Counter';
 
 function App() {
   return (
     <div className="App">
-      <AlbumFeature />
+      {/* <AlbumFeature /> */}
+      <ColorBox />
+      <Counter />
     </div>
   );
 }

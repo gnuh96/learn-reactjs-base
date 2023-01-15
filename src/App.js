@@ -1,13 +1,11 @@
 import React from 'react';
 import './App.scss';
-import ColorBox from './components/ColorBox';
-import TodoFeature from './features/Todo';
+import PostFeature from './features/Post';
 
 function App() {
   return (
     <div className="app">
-      <TodoFeature />
-      <ColorBox />
+      <PostFeature />
     </div>
   );
 }

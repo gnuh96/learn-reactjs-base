@@ -1,20 +1,27 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import './ColorBox.scss';
 
 ColorBox.propTypes = {
 
 };
+function getRandomColor() {
+    const COLOR_LIST = ['deeppink', 'green', 'yellow', 'black', 'blue'];
+    const randomIndex = Math.trunc(Math.random() * COLOR_LIST.length);
+    return COLOR_LIST[randomIndex];
+}
 
-function ColorBox(props) {
-    const [color, setColor] = useState('red');
+function ColorBox() {
+    const [color, setColor] = useState(() => localStorage.getItem('box_color') || 'deeppink');
+    const handleBoxClick = () => {
+        const newColor = getRandomColor();
+        setColor(newColor);
+        localStorage.setItem('box_color', newColor);
+    }
 
     return (
-        <div style={{ color }}>
-            <div >{color}</div>
-
-            <button onClick={() => setColor('black')}>Change to black</button>
-            <button onClick={() => setColor('red')}>Change to red</button>
-        </div>
+        <div className='color-box' style={{ backgroundColor: color }}
+            onClick={handleBoxClick} >
+        </div >
     );
 }
 

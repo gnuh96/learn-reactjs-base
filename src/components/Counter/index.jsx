@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useRef, useState } from 'react';
 
 Counter.propTypes = {
 
@@ -7,13 +6,21 @@ Counter.propTypes = {
 
 function Counter(props) {
     const [count, setCount] = useState(0);
+    const prevCount = useRef(count);
 
+    useEffect(() => {
+        prevCount.current = count;
+    })
+
+    const handleIncreaseClick = () => setCount(x => x + 1);
+    const handleDecreaseClick = () => setCount(x => x - 1);
     return (
         <div>
-            <div>{count}</div>
+            <p>Previous: {prevCount.current}</p>
+            <p>Current: {count}</p>
 
-            <button onClick={() => setCount(x => x + 1)}>Increase</button>
-            <button onClick={() => setCount(x => x - 1)}>Decrease</button>
+            <button onClick={handleIncreaseClick}>Increase</button>
+            <button onClick={handleDecreaseClick}>Decrease</button>
         </div>
     );
 }

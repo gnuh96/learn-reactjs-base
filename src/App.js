@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.scss';
-import Counter from './components/Counter';
-import PostFeature from './features/Post';
+import BetterClock from './components/BetterClock';
+import Clock from './components/Clock';
 
 function App() {
   return (
     <div className="app">
-      <Counter />
+      <h1>Clock</h1>
+      <Clock />
+      <BetterClock />
     </div>
   );
 }

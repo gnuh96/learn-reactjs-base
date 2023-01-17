@@ -1,14 +1,15 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
 import './App.scss';
-import BetterClock from './components/BetterClock';
-import Clock from './components/Clock';
-import MagicBox from './components/MagicBox';
-
+import TodoFeature from './features/Todo';
+import AlbumFeature from './features/Album';
 function App() {
   return (
     <div className="app">
-      <h1>Magic Box</h1>
-      <MagicBox />
+      Header
+      <Route path="/todos" component={TodoFeature} />
+      <Route path="/albums" component={AlbumFeature} />
+      Footer
     </div>
   );
 }

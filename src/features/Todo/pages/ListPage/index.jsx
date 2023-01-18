@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import queryString from 'query-string';
+import React, { useEffect, useState } from 'react';
+import { useHistory, useLocation, useRouteMatch } from 'react-router-dom';
 import TodoForm from '../../components/TodoForm';
 import TodoList from '../../components/TodoList';
 
@@ -14,7 +16,7 @@ function ListPage(props) {
         }, {
             id: 2,
             item: 'Sleep',
-            status: 'new',
+            status: 'completed',
         }, {
             id: 3,
             item: 'Code',
@@ -22,8 +24,21 @@ function ListPage(props) {
         }
     ];
 
+    const location = useLocation();
+    const history = useHistory();
+    const match = useRouteMatch();
+
     const [todoList, setTodoList] = useState(initTodoList);
-    const [filterStatus, setFilterStatus] = useState('all');
+    const [filterStatus, setFilterStatus] = useState(() => {
+        const params = queryString.parse(location.search);
+        // console.log(params);
+        return params.status || 'all';
+    });
+
+    useEffect(() => {
+        const params = queryString.parse(location.search);
+        setFilterStatus(params.status || 'all');
+    }, [location.search]);
 
     const handleTodoClick = (todo, idx) => {
         // console.log(todo, idx);
@@ -40,15 +55,30 @@ function ListPage(props) {
     }
 
     const handleShowAllClick = () => {
-        setFilterStatus('all')
+        // setFilterStatus('all');
+        const queryParams = { status: 'all' };
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     }
 
     const handleShowCompletedClick = () => {
-        setFilterStatus('completed')
+        // setFilterStatus('completed');
+        const queryParams = { status: 'completed' };
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     }
 
     const handleShowNewClick = () => {
-        setFilterStatus('new')
+        // setFilterStatus('new');
+        const queryParams = { status: 'new' };
+        history.push({
+            pathname: match.path,
+            search: queryString.stringify(queryParams),
+        });
     }
 
     function handleTodoFormSubmit(formValues) {

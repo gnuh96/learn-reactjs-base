@@ -4,6 +4,7 @@ import './App.scss';
 import TodoFeature from './features/Todo';
 import AlbumFeature from './features/Album';
 import NotFound from './components/NotFound';
+
 function App() {
   return (
     <div className="app">
